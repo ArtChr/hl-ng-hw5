@@ -11,13 +11,6 @@ import { FavHotelsService } from '../services/favhotels.service';
   styleUrls: ['./hotel-list.component.scss']
 })
 export class ListComponent {
-
-  // @Input()
-  // public hotels: IHotel[];
-
-  // @Input()
-  // public currentHotel: IHotel;
-
   @Input()
   public searchText: string;
 
@@ -49,9 +42,9 @@ export class ListComponent {
       );
   }
 
-  public addHotelToFav(id: number, event: Event): void {
+  public addHotelToFav(hotel: IHotel): void {
     event.stopPropagation();
-    this._favHotelsService.addHotelToFav(id);
+    this._favHotelsService.addHotelToFav(hotel);
   }
 
 }

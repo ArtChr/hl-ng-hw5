@@ -17,21 +17,18 @@ export class FavHotelsService {
     private _hotelsService: HotelsService
   ) { }
 
-  public addHotelToFav(hotelId: number) {
-    const hotel$: Observable<IHotel[]> = this._hotelsService.getProducts().pipe(
-      map((items: IHotel[]) => {
-        return items.filter((item: IHotel) => item.id === hotelId);
-      })
-    );
-
-    hotel$.subscribe(hotel => {
-      this.selectedHotel = hotel[0];
-      this._favHotels.push(this.selectedHotel);
-    });
-  }
-
   public getFavHotels(): IHotel[] {
     return this._favHotels;
+  }
+
+  public addHotelToFav(hotel: IHotel): void {
+    if (!this._favHotels.includes(hotel)) {
+      this._favHotels.push(hotel);
+    }
+  }
+
+  public removeHotelFromFav(hotel: IHotel): void {
+    this._favHotels.splice(this._favHotels.indexOf(hotel), 1);
   }
 
 }

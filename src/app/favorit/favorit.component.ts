@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IHotel } from '../interfaces/hotel.interface';
 import { FavHotelsService } from '../services/favhotels.service';
 
@@ -18,6 +18,10 @@ export class FavoritComponent implements OnInit {
 
   public ngOnInit(): void {
     this.favHotels = this._favHotelsService.getFavHotels();
+  }
+
+  public removeHotelFromFav(hotel: IHotel): void {
+    this._favHotelsService.removeHotelFromFav(hotel);
   }
 
 }

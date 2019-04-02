@@ -3,7 +3,7 @@
   <span [style.font-size.px]="14">
     {{ favHotel.title }} {{ favHotel.stars }}*
   </span>
-  <button>
+  <button (click)="removeHotelFromFav(favHotel)">
     X
   </button>
 </p>
