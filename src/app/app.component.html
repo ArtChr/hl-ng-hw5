@@ -1,0 +1,50 @@
+<h1>Hot Weather Widget :: {{ title }}</h1>
+
+<div class="element">
+  <div class="element-left">
+    <div class="element-bg-img">
+      <img src="assets/images/1.jpg" alt="" class="img-responsive" />
+    </div>
+    <div class="element-left-bottom">
+      <div class="ele-strip">
+        <ul>
+          <li
+            *ngFor="let star of (stars$ | async); index as i; last as myLast"
+            [ngClass]="{ active: isActive(i), 'anc-bor': myLast }"
+            (click)="clickStars(i)"
+          >
+            {{ star }}
+          </li>
+        </ul>
+      </div>
+      <div class="village">
+        <h3>Righteous indignation & like</h3>
+        <span class="line"> </span>
+        <div class="activity_box">
+          <input type="text" placeholder="search" (input)="search($event)" />
+          <span class="line"> </span>
+          <div class="scrollbar" id="style-2">
+            <app-list></app-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="element-right">
+    <div class="village">
+      <h3>Favorites</h3>
+      <div class="favorit_box">
+        <div class="scrollbar scrollbar_fav" id="style-2">
+            <app-favorit></app-favorit>
+        </div>
+      </div>
+    </div>
+    <app-weather [weather]="(currentHotel$ | async)?.weather"></app-weather>
+    <app-profile [profile]="(currentHotel$ | async)?.profile"></app-profile>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>

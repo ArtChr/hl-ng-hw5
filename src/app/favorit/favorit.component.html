@@ -1,0 +1,9 @@
+<p *ngFor="let favHotel of favHotels; even as myEven"
+    [ngClass]="{ 'list-even-row' : myEven }">
+  <span [style.font-size.px]="14">
+    {{ favHotel.title }} {{ favHotel.stars }}*
+  </span>
+  <button>
+    X
+  </button>
+</p>

@@ -1,0 +1,25 @@
+<div class="activity-row"
+  *ngFor="let hotel of hotels$ | async | filter: searchText | sortByStars : displayStars; even as myEven"
+  (click)="selectHotel(hotel.id)"
+>
+<!-- <div class="activity-row"
+  *ngFor="let hotel of hotels | filter: searchText | sortByStars : displayStars; even as myEven"
+  [ngClass]="{'active': hotel.id === currentHotel.id}"
+  (click)="selectHotel(hotel.id)"
+> -->
+  <div class="activity-desc">
+    <h5>{{ hotel.title }} {{ hotel.stars }}*</h5>
+    <p>{{ hotel.address }}</p>
+    <p>{{ hotel.description }}</p>
+    <h6>Tel: {{ hotel.phone }}</h6>
+  </div>
+  <div class="activity-img">
+    <ul>
+      <li><img [src]="hotel.photos[0]" alt=""/></li>
+      <li><img [src]="hotel.photos[1]" alt="" /></li>
+    </ul>
+    <br>
+    <button (click)="addHotelToFav(hotel.id, $event)">Add to fav</button>
+  </div>
+  <div class="clear"></div>
+</div>
