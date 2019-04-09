@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { IWeather } from '../interfaces/hotel.interface';
+import { IWeather, IHotel } from '../interfaces/hotel.interface';
+import { HotelsService } from '../services/hotels.service';
 
 @Component({
   selector: 'app-weather',
@@ -7,6 +8,17 @@ import { IWeather } from '../interfaces/hotel.interface';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent {
-  @Input()
+
   public weather: IWeather;
+  public hotel: IHotel;
+
+  public constructor(
+    private _hotelsService: HotelsService,
+  ) { }
+
+  public ngOnInit(): void {
+    this.hotel = this._hotelsService.getCurrentHotel();
+    this.weather = this.hotel.weather;
+
+  }
 }

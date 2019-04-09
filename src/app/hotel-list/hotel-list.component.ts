@@ -8,24 +8,15 @@ import { FavHotelsService } from '../services/favhotels.service';
 @Component({
   selector: 'app-list',
   templateUrl: './hotel-list.component.html',
-  styleUrls: ['./hotel-list.component.scss']
+  styleUrls: ['./hotel-list.component.scss'],
 })
 export class ListComponent {
+
   @Input()
   public searchText: string;
 
   @Input()
   public displayStars: number;
-
-  // @Output()
-  // public hotelSelected: EventEmitter<number> = new EventEmitter();
-
-  // @Output()
-  // public hotelFav: EventEmitter<number> = new EventEmitter();
-
-  // public selectHotel(id: number): void {
-  //   this.hotelSelected.emit(id);
-  // }
 
   public hotels$: Observable<IHotel[]>;
   public currentHotel$: Observable<IHotel>;
@@ -34,17 +25,21 @@ export class ListComponent {
     private _hotelsService: HotelsService,
     private _favHotelsService: FavHotelsService
   ) {
-    this.hotels$ = this._hotelsService.getProducts();
-    this.currentHotel$ = this._hotelsService.getProducts().pipe(
-        map((items: IHotel[]) => {
-          return items[0];
-        })
-      );
+    this.hotels$ = this._hotelsService.getHotels();
+    this.currentHotel$ = this._hotelsService.getHotels().pipe(
+      map((items: IHotel[]) => {
+        return items[0];
+      })
+    );
   }
 
   public addHotelToFav(hotel: IHotel): void {
     event.stopPropagation();
     this._favHotelsService.addHotelToFav(hotel);
+  }
+
+  public selectHotel(hotel: IHotel): void {
+    this._hotelsService.setCurrentHotel(hotel);
   }
 
 }

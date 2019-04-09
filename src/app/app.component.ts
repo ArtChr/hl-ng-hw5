@@ -11,27 +11,22 @@ import { HotelsService } from './services/hotels.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title: string = 'hw4';
-
+  public title: string = 'hw5';
   public searchText: string;
-
-  // public ngOnInit(): void {
-  //   this.currentHotel$.subscribe((data: IHotel) => {
-  //     console.log(data);
-  //   });
-  // }
-
   public displayStars: number = 0;
   public activeStar: number;
   public stars$: Observable<string[]> = of(stars);
-  public favHotels: IHotel[] = [];
+  public currentHotel$: Observable<IHotel>;
 
-  public constructor() {
+  public constructor(
+    private _hotelsService: HotelsService
+  ) {
+    this.currentHotel$ = this._hotelsService.getHotels().pipe(
+      map((items: IHotel[]) => {
+        return items[0];
+      })
+    );
   }
-
-  // public selectHotel(id: number): void {
-  //   this.currentHotel = this.hotels.find((el: IHotel) => el.id === id);
-  // }
 
   public search(event: Event): void {
     this.searchText = (event.target as HTMLInputElement).value;
@@ -45,13 +40,5 @@ export class AppComponent {
   public isActive(index: number): boolean {
     return this.activeStar === index;
   }
-
-  // public addHotelToFav(id: number): void {
-  //   this.favHotels.push(this.hotels.find((el: IHotel) => el.id === id));
-  // }
-
-  // public removeHotelFromFav(id: number): void {
-  //   // this.favHotels = this.favHotels.filter((el: IHotel) => el.id !== id);
-  // }
 
 }

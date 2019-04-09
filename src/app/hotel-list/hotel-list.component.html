@@ -1,6 +1,6 @@
 <div class="activity-row"
   *ngFor="let hotel of hotels$ | async | filter: searchText | sortByStars : displayStars; even as myEven"
-  (click)="selectHotel(hotel.id)"
+  (click)="selectHotel(hotel)"
 >
 <!-- <div class="activity-row"
   *ngFor="let hotel of hotels | filter: searchText | sortByStars : displayStars; even as myEven"

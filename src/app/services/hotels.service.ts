@@ -8,12 +8,25 @@ import { Observable } from 'rxjs';
 })
 export class HotelsService {
 
+  private currentHotel: IHotel;
+
   public constructor(
     private _http: HttpClient
   ) { }
 
-  public getProducts(): Observable<IHotel[]> {
-    return this._http.get<IHotel[]>('http://localhost:3001/hotels')
+  public getHotels(): Observable<IHotel[]> {
+    return this._http.get<IHotel[]>('http://localhost:3001/hotels');
+  }
+
+  public setCurrentHotel(hotel: IHotel): void {
+    this.currentHotel = hotel;
+  }
+
+  public getCurrentHotel(): IHotel | [] {
+    if (this.currentHotel) {
+      return this.currentHotel;
+    }
+    return [];
   }
 
 }
